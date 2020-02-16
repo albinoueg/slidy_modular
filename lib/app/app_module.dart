@@ -1,24 +1,28 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:slidy_modular/app/modules/login/login_module.dart';
+import 'package:slidy_modular/app/pages/splash/splash_controller.dart';
 import 'package:slidy_modular/app/app_controller.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter/material.dart';
 import 'package:slidy_modular/app/app_widget.dart';
 import 'package:slidy_modular/app/modules/home/home_module.dart';
-import 'package:slidy_modular/app/shared/utils/constants.dart';
+import 'package:slidy_modular/app/pages/splash/splash_page.dart';
 
-class AppModule extends MainModule{
+class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
-    Bind((i) => AppController()),
-    Bind((i) => Dio(BaseOptions(baseUrl: URL_BASE))),
-  ];
+        Bind((i) => SplashController()),
+        Bind((i) => AppController()),
+      ];
 
   @override
   List<Router> get routers => [
-    ///Passa a responsabilidade para o HomeModule
-    Router('/', module: HomeModule()),
-  ];
+        Router('/', child: (_, args) => SplashPage()),
+        Router('/home', module: HomeModule()),
+        Router('/login', module: LoginModule()),
+      ];
 
   @override
   Widget get bootstrap => AppWidget();
+
+  static Inject get to => Inject<AppModule>.of();
 }
