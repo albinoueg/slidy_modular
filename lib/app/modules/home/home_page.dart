@@ -8,37 +8,39 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-
-  final homeController = Modular.get<HomeController>();
+class _HomePageState extends ModularState<HomePage, HomeController> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        leading: IconButton(
+          icon: Icon(Icons.highlight_off),
+          onPressed: controller.logoff,
+        ),
       ),
       body: Observer(
         builder: (BuildContext context){
           ///Mensagem de erro.
-          if(homeController.pokemons.error != null){
+          if(controller.pokemons.error != null){
             return Center(
               child: RaisedButton(
                 child: Text('Erro prescione novamente'),
                 onPressed: (){
-                  homeController.fetchPokemons();
+                  controller.fetchPokemons();
                 },
               ),
             );
           }
           ///Load caso ainda esteja carregando.
-          if(homeController.pokemons.value == null){
+          if(controller.pokemons.value == null){
             return Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          var list = homeController.pokemons.value;
+          var list = controller.pokemons.value;
 
           return ListView.builder(
             itemCount: list.length,

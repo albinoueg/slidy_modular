@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
+import 'package:slidy_modular/app/shared/auth/auth_controller.dart';
 
 class SplashPage extends StatefulWidget {
   final String title;
@@ -10,13 +12,30 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  ReactionDisposer disposer;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 2)).then((v){
-      Modular.to.pushReplacementNamed('/home');
+
+    disposer = autorun((_) {
+      final auth = Modular.get<AuthController>();
+
+      ///Delay de inicialização para simular o splash
+      Future.delayed(Duration(seconds: 3)).then((v){
+        if(auth.status == AuthStatus.login){
+        Modular.to.pushReplacementNamed('/home');
+      }else if(auth.status == AuthStatus.logoff){
+          Modular.to.pushReplacementNamed('/login');
+        }
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    disposer();
   }
 
   @override

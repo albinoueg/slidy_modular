@@ -6,19 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:slidy_modular/app/app_widget.dart';
 import 'package:slidy_modular/app/modules/home/home_module.dart';
 import 'package:slidy_modular/app/pages/splash/splash_page.dart';
+import 'package:slidy_modular/app/shared/auth/auth_controller.dart';
+import 'package:slidy_modular/app/shared/auth/repositories/auth_reposiotry_interface.dart';
+import 'package:slidy_modular/app/shared/auth/repositories/auth_repository.dart';
 
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
         Bind((i) => SplashController()),
-        Bind((i) => AppController()),
+        //Bind((i) => AppController()),
+        Bind<IAuthRepository>((i) => AuthRepository()),
+        Bind((i) => AuthController()),
       ];
 
   @override
   List<Router> get routers => [
         Router('/', child: (_, args) => SplashPage()),
-        Router('/home', module: HomeModule()),
         Router('/login', module: LoginModule()),
+        Router('/home', module: HomeModule()),
+        
       ];
 
   @override

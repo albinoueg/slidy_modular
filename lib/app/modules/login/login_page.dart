@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:slidy_modular/app/modules/login/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -8,7 +10,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ModularState<LoginPage, LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,12 @@ class _LoginPageState extends State<LoginPage> {
         title: Text(widget.title),
       ),
       body: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          RaisedButton(
+            onPressed: controller.loginWithGoogle,
+            child: Text('Login with Google'),
+            )
+        ],
       ),
     );
   }
