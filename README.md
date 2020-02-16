@@ -1,16 +1,16 @@
 # slidy_modular
 
-A new Flutter project.
+## Projeto base para futuras aplicações.
 
-## Getting Started
+### Itens deste projeto
 
-This project is a starting point for a Flutter application.
+Este projeto apresenta uma estrutura basica para aplicações modulares em flutter, contem um modulo de autorização baseado no firebase e rotas inicias para tela de splash e tela home.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### TO DO
+Tela de login
+Tela Home
+Tela Splash
+Login com Google - OK
+Login com Facebook
+Login com e-mail
+Login com jwt
